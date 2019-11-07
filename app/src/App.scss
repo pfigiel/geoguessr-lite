@@ -1,25 +1,102 @@
-#mainContent {
-  #gameplayWrapper {
-    width: 100vw;
-    height: 100vh;
-  
-    > * {
-      display: inline-block;
-      vertical-align: top;
-      width: 50%;
-      height: 100%;
-      top: 0;
+button {
+  background-color: #484f57;
+  color: #DCD3D3;
+  font-size: 16px;
+  height: 50px;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+      background-color: #8AA2A9;
+      color: #484f57;
+  }
+}
+
+.link {
+  color: #484f57;
+
+  &:hover {
+    color: #8AA2A9;
+    cursor: pointer;
+  }
+}
+
+.errorMessage {
+  background-color: #E5A8A7;
+  padding: 10px;
+  width: 500px;
+}
+
+.disabled {
+  background-color: #AAA;
+
+  &:hover {
+    cursor: default;
+    background-color: #AAA;
+    color: #DCD3D3;
+  }
+}
+
+#header {
+  height: 70px;
+  padding: 0 50px;
+  background-color: #484f57;
+  color: #DCD3D3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .link {
+    color: #DCD3D3;
+
+    &:hover {
+      color: #8AA2A9;
     }
   }
-  
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #navlinks {
+    > * {
+      margin-left: 20px;
+    }
+  }
+
+  #headerLogo {
+    height: 50px;
+    margin-right: 50px
+  }
+
+  #headerTitle {
+    font-size: 40px;
+
+    span:last-of-type {
+      color: #ADF6B1;
+      font-weight: 700;
+    }
+  }
+}
+
+#mainContent {
+  min-height: calc(100vh - 240px);
+  background-color: #DDD9D9;
+  padding: 50px;
+  color: #484f57;
+
   #logInScreen, #registerScreen {
     text-align: center;
-    width: 80%;
-    padding: 100px 10%;
+    width: 500px;
+    margin: 100px calc(50% - 250px);
   
     input {
-      width: 100%;
-      height: 30px;
+      width: calc(100% - 20px);
+      height: 20px;
+      padding: 5px 10px;
+      border: none;
     }
 
     button {
@@ -37,13 +114,155 @@
     }
   }
 
-  #logInScreen {
-    p:last-child {
-      color: blue;
-      
-      &:hover {
-        cursor: pointer;
+  #mainMenuScreen {
+    width: 100%;
+    padding-top: 100px;
+    text-align: center;
+
+     > * {
+       display: block;
+     }
+
+     > button {
+        width: 200px;
+        margin-left: calc(50% - 100px);
+        margin-top: 30px;
+     }
+  }
+
+  #gameplayWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    > * {
+      width: calc(50% - 30px);
+      height: calc(100vh - 240px);
+
+      &:last-child {
+        border: 2px solid #484f57;
       }
+    }
+
+    #gameplayScreen {
+      position: relative;
+
+      > * {
+        width: 100%;
+      }
+
+      #imageWrapper {
+        width: 100%;
+        height: 400px;
+        background-color: #484f57;
+        border: 2px solid #484f57;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      #stopwatch {
+        span {
+          font-size: 26px;
+        }
+      }
+
+      #navButtons {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  #highscores {
+    width: 500px;
+    margin: 100px 0 0 calc(50% - 250px);
+    text-align: center;
+    position: relative;
+
+    > div:first-child {
+      > div > div {
+        display: flex;
+        justify-content: space-between;
+  
+        span {
+          font-size: 20px;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    > div:last-child {
+      margin-top: 100px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+#footer {
+  min-height: 70px;
+  background-color: #484f57;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+
+  span {
+    color: #DDD9D9;
+    padding: 10px 0;
+
+    &:first-of-type {
+      margin-right: 50px;
+    }
+  }
+}
+
+#cookieBanner {
+  z-index: 9999;
+  color: #484f57;
+  position: fixed;
+  bottom: 100px;
+  left: 50px;
+  width: calc(100% - 200px);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #DDD9D9;
+  box-shadow: 0 0 10px 0 #484f57;
+  padding: 10px 50px;
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 80px;
+      margin-right: 20px;
+    }
+  }
+
+  #buttons {
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+
+    button {
+      width: 150px;
+      margin-left: 20px;
     }
   }
 }

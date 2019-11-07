@@ -12,6 +12,8 @@ export class RegisterScreen extends React.Component {
                 <h1>Register</h1>
                 <p>Email address:</p>
                 <input></input>
+                <p>Username:</p>
+                <input />
                 <p>Password:</p>
                 <input></input>
                 <p>Confirm password:</p>
