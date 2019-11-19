@@ -1,15 +1,24 @@
 import React from "react";
 import { storageItems } from "../utils/storageItems";
+import { GameService } from "../services/gameService";
 
 export class HighscoresScreen extends React.Component {
     state = {
-        globalHighscores: [{username: "test", score: 1000}, {username: "test2", score: 900}, {username: "test3", score: 800}, {username: "test4", score: 700}],
-        userHighscores: [4444, 3333, 2222, 1111],
+        globalHighscores: [],
+        userHighscores: [],
         isShowingGlobalHighscores: true
     }
 
-    componentDidMount() {
-        // fetch highscores
+    constructor() {
+        super();
+        this.gameService = new GameService();
+    }
+
+    async componentDidMount() {
+        this.setState({
+            globalHighscores: await this.gameService.getGlobalHighscores(),
+            userHighscores: await this.gameService.getUserHighscores()
+        })
     }
 
     toggleMode = () => {

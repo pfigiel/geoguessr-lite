@@ -7,21 +7,29 @@ import { MainMenuScreen } from './components/MainMenuScreen';
 import { GameplayScreen } from './components/GameplayScreen';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { storageItems } from './utils/storageItems';
 import { CookieBanner } from './components/CookieBanner';
 import { HighscoresScreen } from './components/HighscoresScreen';
+import Cookies from 'universal-cookie';
+import { cookieNames } from './utils/cookieNames';
 
 export class App extends React.Component {
   state = {
     activeScreen: activeScreen.LOADING,
-    shouldShowCookieBanner: !localStorage.getItem(storageItems.NOT_COOKIES_ACCEPTED),
+    shouldShowCookieBanner: false,
+  }
+
+  constructor() {
+    super();
+    this.cookies = new Cookies();
   }
 
   componentDidMount() {
     this.setActiveScreen(activeScreen.LOG_IN);
+    this.setState({shouldShowCookieBanner: !this.cookies.get(cookieNames.NOT_COOKIES_ACCEPTED)});
   }
 
   toggleCookieBanner = () => {
+    this.cookies.set(cookieNames.NOT_COOKIES_ACCEPTED, true);
     this.setState({ shouldShowCookieBanner: !this.state.shouldShowCookieBanner });
   }
 

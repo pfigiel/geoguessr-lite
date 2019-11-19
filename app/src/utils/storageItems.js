@@ -1,5 +1,5 @@
 export const storageItems = {
     USERNAME: "USERNAME",
     EMAIL_ADDRESS: "EMAIL_ADDRESS",
-    NOT_COOKIES_ACCEPTED: "NOT_COOKIES_ACCEPTED"
+    TOKEN: "TOKEN"
 }

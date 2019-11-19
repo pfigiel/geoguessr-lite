@@ -141,7 +141,7 @@ button {
       width: calc(50% - 30px);
       height: calc(100vh - 240px);
 
-      &:last-child {
+      &:not(#gameplaySummary):last-child {
         border: 2px solid #484f57;
       }
     }
@@ -167,7 +167,9 @@ button {
         }
       }
 
-      #stopwatch {
+      #stopwatch, #result {
+        margin-bottom: 20px;
+        
         span {
           font-size: 26px;
         }
@@ -178,11 +180,29 @@ button {
         bottom: 0;
         display: flex;
         justify-content: space-between;
+      }
+    }
 
+    #gameplaySummary {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        font-size: 26px;
+      }
+
+      #navButtons {
         button {
-          width: 200px;
+          margin: 0 20px;
         }
       }
+    }
+
+    button {
+      width: 200px;
     }
   }
 
