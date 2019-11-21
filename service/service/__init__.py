@@ -40,6 +40,23 @@ if users.find_one() == None:
     })
     print("Done")
 
+if gameData.find_one() == None:
+    print("No game data in database, populating...")
+    coordinates = ["50.288641 18.677335", "50.264850 18.721861", "50.296232 18.670017", "50.300551 18.669556", "50.313086 18.689425"]
+    imageUrls = [
+        "https://bi.im-g.pl/im/f6/bc/fe/z16694518V,Centrum-Nowych-Technologii-Politechniki-Slaskiej.jpg",
+        "https://pic.conadrogach.pl/zdjecia/obiekt/2366/restauracja-mcdonalds9.450.jpg",
+        "https://gliwice.eu/sites/default/files/styles/gliwice_880x495/public/news/images/2_1.jpg?itok=VIZ2TZSf",
+        "https://sunnycompany.com/media/zoo/images/palmiarnia-gliwice1_0d04967702e20dbf0c7469dfaf1aeaf8.jpg",
+        "https://dzieje.pl/sites/default/files/styles/open_article_750x0_/public/201307/radiostacja_gliwice.jpg?itok=AzuJWu_y"
+    ]
+    for i in range(0, 5):
+        gameData.insert({
+            "coordinates": coordinates[i],
+            "imageUrl": imageUrls[i]
+        })
+    print("Done")
+
 @app.route("/authenticate", methods=["POST"])
 @cross_origin()
 def authenticate():
