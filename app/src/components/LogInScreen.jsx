@@ -45,7 +45,7 @@ export class LogInScreen extends React.Component {
                 <p>Email address:</p>
                 <input onChange={this.onEmailAddressChange} />
                 <p>Password:</p>
-                <input onChange={this.onPasswordChange} />
+                <input onChange={this.onPasswordChange} type="password" />
                 <button onClick={this.onLoginButtonClick}>Log in</button>
                 <span className="link" onClick={this.onRegisterLinkClick}>Don't have an account yet? Register now!</span>
                 {this.state.isError && (

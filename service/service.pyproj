@@ -30,7 +30,6 @@
   <ItemGroup>
     <Compile Include="runserver.py" />
     <Compile Include="service\__init__.py" />
-    <Compile Include="service\views.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="service\" />
@@ -38,7 +37,6 @@
     <Folder Include="service\static\content\" />
     <Folder Include="service\static\fonts\" />
     <Folder Include="service\static\scripts\" />
-    <Folder Include="service\templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
@@ -64,8 +62,6 @@
     <Content Include="service\static\scripts\respond.js" />
     <Content Include="service\static\scripts\respond.min.js" />
     <Content Include="service\static\scripts\_references.js" />
-    <Content Include="service\templates\index.html" />
-    <Content Include="service\templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">

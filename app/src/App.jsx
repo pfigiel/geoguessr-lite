@@ -11,6 +11,7 @@ import { CookieBanner } from './components/CookieBanner';
 import { HighscoresScreen } from './components/HighscoresScreen';
 import Cookies from 'universal-cookie';
 import { cookieNames } from './utils/cookieNames';
+import { IdentityService } from './services/identityService';
 
 export class App extends React.Component {
   state = {
@@ -21,10 +22,15 @@ export class App extends React.Component {
   constructor() {
     super();
     this.cookies = new Cookies();
+    this.identityService = new IdentityService();
   }
 
-  componentDidMount() {
-    this.setActiveScreen(activeScreen.LOG_IN);
+  async componentDidMount() {
+    if(await this.identityService.tryAuthorize()) {
+      this.setActiveScreen(activeScreen.MAIN_MENU);
+    } else {
+      this.setActiveScreen(activeScreen.LOG_IN);
+    }
     this.setState({shouldShowCookieBanner: !this.cookies.get(cookieNames.NOT_COOKIES_ACCEPTED)});
   }
 

@@ -1,14 +1,12 @@
 import React from "react"
 import { activeScreen } from "../utils/activeScreen";
 import { IdentityService } from "../services/identityService";
+import { storageItems } from "../utils/storageItems";
 
 export class MainMenuScreen extends React.Component {
-    state = {
-        username: "Test"
-    }
-
     constructor() {
         super();
+        this.username = localStorage.getItem(storageItems.USERNAME);
         this.identityService = new IdentityService();
     }
 
@@ -28,7 +26,7 @@ export class MainMenuScreen extends React.Component {
     render() {
         return(
             <div id="mainMenuScreen">
-                <h1>Welcome {this.state.username}</h1>
+                <h1>Welcome {this.username}</h1>
                 <button onClick={this.onStartGameButtonClick}>Start game</button>
                 <button onClick={this.onHighscoresButtonClick}>Highscores</button>
                 <button onClick={this.onLogoutButtonClick}>Logout</button>
