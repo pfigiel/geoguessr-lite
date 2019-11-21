@@ -35,8 +35,8 @@ export class GameplayScreen extends React.Component {
     setGameplayData = async () => {
         const gameplayData = await this.gameService.getGameplayData();
         this.setState({
-            imageUrls: gameplayData.imageUrls,
-            coordinates: gameplayData.coordinates
+            imageUrls: gameplayData.map(data => data.imageUrl),
+            coordinates: gameplayData.map(data => data.coordinates.split(" ").map(coord => Number(coord)))
         })
     }
 
@@ -54,8 +54,8 @@ export class GameplayScreen extends React.Component {
             this.setState({
                 isGameFinished: true,
                 leaderboardPosition: await this.gameService.getLeaderboardPosition(this.state.totalScore)
-
             });
+            await this.gameService.saveScore(this.state.totalScore);
         } else {
             this.setState({
                 shouldShowAnswer: false,

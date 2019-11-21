@@ -1,7 +1,6 @@
 import React from "react";
 import { activeScreen } from "../utils/activeScreen";
 import { IdentityService } from "../services/identityService";
-import { storageItems } from "../utils/storageItems";
 
 export class LogInScreen extends React.Component {
     state = {
@@ -16,10 +15,7 @@ export class LogInScreen extends React.Component {
     }
 
     onLoginButtonClick = async () => {
-        const user = await this.identityService.login(this.state.email, this.state.password);
-        if (user) {
-            localStorage.setItem(storageItems.USERNAME, user.username);
-            localStorage.setItem(storageItems.EMAIL_ADDRESS, user.email);
+        if (await this.identityService.login(this.state.email, this.state.password)) {
             this.props.setActiveScreen(activeScreen.MAIN_MENU);
         } else {
             this.setState({ isError: true });
@@ -46,7 +42,10 @@ export class LogInScreen extends React.Component {
                 <input onChange={this.onEmailAddressChange} />
                 <p>Password:</p>
                 <input onChange={this.onPasswordChange} type="password" />
-                <button onClick={this.onLoginButtonClick}>Log in</button>
+                <button onClick={this.onLoginButtonClick}
+                    className={(this.state.email === "" || this.state.password === "") ? "disabled" : ""}>
+                    Log in
+                </button>
                 <span className="link" onClick={this.onRegisterLinkClick}>Don't have an account yet? Register now!</span>
                 {this.state.isError && (
                     <span className="errorMessage">Error while logging in. Please try again.</span>

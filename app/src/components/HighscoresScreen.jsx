@@ -45,10 +45,10 @@ export class HighscoresScreen extends React.Component {
                         <>
                             <h1>Your highscores</h1>
                             <div>
-                                {this.state.globalHighscores.map((el, index) => (
+                                {this.state.userHighscores.map((el, index) => (
                                     <div>
                                         <span>{`${index + 1}. ${localStorage.getItem(storageItems.USERNAME)}`}</span>
-                                        <span>{el.score}</span>
+                                        <span>{el}</span>
                                     </div>
                                 ))}
                             </div>

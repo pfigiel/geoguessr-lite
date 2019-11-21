@@ -2,7 +2,7 @@
 The flask application package.
 """
 
-import hashlib, binascii, os, pymongo, jwt, time, datetime, json
+import hashlib, binascii, os, pymongo, jwt, time, datetime, json, random
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS, cross_origin
 
@@ -28,6 +28,8 @@ cors = CORS(app)
 dbClient = pymongo.MongoClient("mongodb://localhost:27017/geoguessr-lite-db")
 db = dbClient["geoguessr-lite-db"]
 users = db["users"]
+gameData = db["gameData"]
+highscores = db["highscores"]
 
 if users.find_one() == None:
     print("No users in database, creating admin account...")
@@ -70,3 +72,79 @@ def authorize():
     except:
         pass
     return "Invalid token", 401
+
+@app.route("/register", methods=["POST"])
+@cross_origin()
+def register():
+    data = json.loads(request.data)
+    try:
+        users.insert({
+            "email": data["email"],
+            "username": data["username"],
+            "passwordHash": hash_password(data["password"])
+        })
+        return "", 200
+    except:
+        return "", 404
+
+@app.route("/saveScore", methods=["POST"])
+@cross_origin()
+def saveScore():
+    data = json.loads(request.data)
+    highscores.insert({
+        "username": data["username"],
+        "score": int(data["score"])
+    })
+    return "", 200
+
+@app.route("/getGameData", methods=["GET"])
+@cross_origin()
+def getGameData():
+    indexes = random.sample(range(0, gameData.count()), 5)
+    indexes.sort()
+    print(indexes)
+    data = []
+    index = 0
+    for dataPiece in gameData.find():
+        if index == indexes[0]:
+            data.append({
+                "coordinates": dataPiece["coordinates"],
+                "imageUrl": dataPiece["imageUrl"]
+            })
+            indexes.pop(0)
+            index += 1
+    random.shuffle(data)
+    return jsonify(data), 200
+
+@app.route("/getGlobalHighscores", methods=["GET"])
+@cross_origin()
+def getGlobalHighscores():
+    data = []
+    for highscore in highscores.find():
+        data.append({
+            "username": highscore["username"],
+            "score": highscore["score"]
+        })
+    
+    data.sort(key = lambda x: x["score"], reverse=True)
+
+    return jsonify(data[0:10]), 200
+
+@app.route("/getUserHighscores", methods=["GET"])
+@cross_origin()
+def getUserHighscores():
+    data = []
+    print(request.args.get("username"))
+    for highscore in highscores.find({ "username": request.args.get("username") }):
+        data.append(int(highscore["score"]))
+    
+    data.sort(reverse=True)
+
+    return jsonify(data[0:10]), 200
+
+@app.route("/getLeaderboardPosition", methods=["GET"])
+@cross_origin()
+def getLeaderboardPosition():
+    print(request.args.get("score"))
+    betterScores = highscores.find({ "score": {"$gt": int(request.args.get("score"))} }).count()
+    return jsonify(betterScores + 1), 200

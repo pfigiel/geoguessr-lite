@@ -1,36 +1,66 @@
+import { storageItems } from "../utils/storageItems";
+
 export class GameService {
-    async getLeaderboardPosition() {
-        // TODO: do proper fetch
-        return 1;
+    async saveScore(score) {
+        const response = await fetch("http://127.0.0.1:5000/saveScore", {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": "http://127.0.0.1:5000",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: localStorage.getItem(storageItems.USERNAME),
+                score
+            })
+        });
+        return response.status === 200;
+    }
+
+    async getLeaderboardPosition(score) {
+        const response = await fetch(`http://127.0.0.1:5000/getLeaderboardPosition?score=${score}`, {
+            method: "GET",
+            headers: {
+                "Access-Control-Allow-Origin": "http://127.0.0.1:5000"
+            }
+        });
+        if(response.status === 200) {
+            return await response.json();
+        }
     }
 
     async getGameplayData() {
-        // TODO: do proper fetch
-        return {
-            imageUrls: [
-                "https://bi.im-g.pl/im/f6/bc/fe/z16694518V,Centrum-Nowych-Technologii-Politechniki-Slaskiej.jpg",
-                "https://pic.conadrogach.pl/zdjecia/obiekt/2366/restauracja-mcdonalds9.450.jpg",
-                "https://gliwice.eu/sites/default/files/styles/gliwice_880x495/public/news/images/2_1.jpg?itok=VIZ2TZSf",
-                "https://bi.im-g.pl/im/f6/bc/fe/z16694518V,Centrum-Nowych-Technologii-Politechniki-Slaskiej.jpg",
-                "https://pic.conadrogach.pl/zdjecia/obiekt/2366/restauracja-mcdonalds9.450.jpg"
-            ],
-            coordinates: [
-                [50.288641, 18.677335],
-                [50.264850, 18.721861],
-                [50.296232, 18.670017],
-                [50.288641, 18.677335],
-                [50.264850, 18.721861],
-            ]
+        const response = await fetch("http://127.0.0.1:5000/getGameData", {
+            method: "GET",
+            headers: {
+                "Access-Control-Allow-Origin": "http://127.0.0.1:5000"
+            }
+        });
+        if(response.status === 200) {
+            return await response.json();
         }
     }
 
     async getGlobalHighscores() {
-        // TODO: do proper fetch
-        return [{username: "test", score: 1000}, {username: "test2", score: 900}, {username: "test3", score: 800}, {username: "test4", score: 700}];
+        const response = await fetch("http://127.0.0.1:5000/getGlobalHighscores", {
+            method: "GET",
+            headers: {
+                "Access-Control-Allow-Origin": "http://127.0.0.1:5000"
+            }
+        });
+        if(response.status === 200) {
+            return await response.json();
+        }
     }
 
     async getUserHighscores() {
-        // TODO: do proper fetch
-        return [4444, 3333, 2222, 1111];
+        const response = await fetch(`http://127.0.0.1:5000/getUserHighscores?username=${localStorage.getItem(storageItems.USERNAME)}`, {
+            method: "GET",
+            headers: {
+                "Access-Control-Allow-Origin": "http://127.0.0.1:5000"
+            }
+        });
+        if(response.status === 200) {
+            return await response.json();
+        }
     }
 }

@@ -37,11 +37,23 @@ export class IdentityService {
             localStorage.setItem(storageItems.EMAIL_ADDRESS, responseBody.email);
             localStorage.setItem(storageItems.USERNAME, responseBody.username);
             localStorage.setItem(storageItems.TOKEN, responseBody.token);
-            return { email: responseBody.email, username: responseBody.username };
+            return true;
         }
     }
 
     async logout() {
         localStorage.removeItem(storageItems.TOKEN);
+    }
+
+    async register(email, username, password) {
+        const response = await fetch("http://127.0.0.1:5000/register", {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": "http://127.0.0.1:5000",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, username, password })
+        });
+        return response.status === 200;
     }
 }
