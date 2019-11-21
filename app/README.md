@@ -5,4 +5,4 @@ https://nodejs.org/en/download/
 1. Inside the project directory run:
     * `npm install`
     * `npm start`
-2. The application will start on `localhost:3000`
+2. The application will start on `http://127.0.0.1:3000`
