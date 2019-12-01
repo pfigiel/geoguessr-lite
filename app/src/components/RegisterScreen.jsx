@@ -76,7 +76,8 @@ export class RegisterScreen extends React.Component {
                 <input onChange={this.onConfirmedPasswordChange}
                     type="password" />
                 <button onClick={this.onRegisterButtonClicked}
-                    className={!this.state.isFormDataValid ? "disabled" : ""}>
+                    className={!this.state.isFormDataValid ? "disabled" : ""}
+                    disabled={!this.state.isFormDataValid ? "disabled" : ""}>
                     Register
                 </button>
                 <span className="link" onClick={this.onBackToLoginLinkClick}>Back to login screen</span>

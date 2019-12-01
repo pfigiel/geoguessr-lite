@@ -43,7 +43,8 @@ export class LogInScreen extends React.Component {
                 <p>Password:</p>
                 <input onChange={this.onPasswordChange} type="password" />
                 <button onClick={this.onLoginButtonClick}
-                    className={(this.state.email === "" || this.state.password === "") ? "disabled" : ""}>
+                    className={(this.state.email === "" || this.state.password === "") ? "disabled" : ""}
+                    disabled={this.state.email === "" || this.state.password === ""}>
                     Log in
                 </button>
                 <span className="link" onClick={this.onRegisterLinkClick}>Don't have an account yet? Register now!</span>

@@ -152,11 +152,13 @@ export class GameplayScreen extends React.Component {
                             </div>
                             <div id="navButtons">
                                 <button onClick={this.onSubmitGuessButtonClick}
-                                    className={this.state.markedPosition == null || this.state.shouldShowAnswer ? "disabled" : ""}>
+                                    className={this.state.markedPosition == null || this.state.shouldShowAnswer ? "disabled" : ""}
+                                    disabled={this.state.markedPosition == null || this.state.shouldShowAnswer}>
                                     Submit guess
                                 </button>
                                 <button onClick={this.onNextLocationButtonClick}
-                                    className={!this.state.shouldShowAnswer ? "disabled" : ""}>
+                                    className={!this.state.shouldShowAnswer ? "disabled" : ""}
+                                    disabled={!this.state.shouldShowAnswer}>
                                     {this.state.turn === 4 ? "Finish" : "Next location"}
                                 </button>
                             </div>
