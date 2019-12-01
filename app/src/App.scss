@@ -155,7 +155,7 @@ button {
 
       #imageWrapper {
         width: 100%;
-        height: 400px;
+        height: 370px;
         background-color: #484f57;
         border: 2px solid #484f57;
         overflow: hidden;
@@ -176,7 +176,7 @@ button {
       }
 
       #navButtons {
-        position: absolute;
+        position: relative;
         bottom: 0;
         display: flex;
         justify-content: space-between;
