@@ -1,0 +1,4 @@
+Flask<1
+pymongo
+pyjwt
+flask_cors
