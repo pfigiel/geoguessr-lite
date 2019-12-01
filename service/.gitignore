@@ -269,4 +269,4 @@ __pycache__/
 pyvenv.cfg
 .venv
 pip-selfcheck.json
-!env
+env/Lib
